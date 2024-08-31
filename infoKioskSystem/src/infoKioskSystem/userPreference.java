@@ -1,7 +1,6 @@
 package infoKioskSystem;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -10,6 +9,12 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import java.awt.Color;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+import infoKioskSystem.MenuCategories;//importing menu frame\
+import java.util.Scanner;
+
 
 public class userPreference extends JFrame {
 
@@ -38,7 +43,7 @@ public class userPreference extends JFrame {
 	 */
 	public userPreference() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 700, 830);
+		setBounds(100, 100, 725, 894);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(153, 113, 91));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -54,7 +59,6 @@ public class userPreference extends JFrame {
 		
 		txtUsername = new JTextField();
 		txtUsername.setForeground(new Color(128, 128, 128));
-		txtUsername.setText("enter customer name");
 		txtUsername.setBackground(new Color(255, 255, 255));
 		txtUsername.setFont(new Font("SimSun", Font.PLAIN, 18));
 		txtUsername.setBounds(230, 232, 251, 38);
@@ -70,5 +74,21 @@ public class userPreference extends JFrame {
 		btnTakeOut.setFont(new Font("Snap ITC", Font.PLAIN, 17));
 		btnTakeOut.setBounds(230, 481, 251, 55);
 		contentPane.add(btnTakeOut);
+		
+		btnDineIn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MenuCategories menuCategories = new MenuCategories();
+				menuCategories.setVisible(true);
+				dispose(); 
+			}
+		});
+		
+		btnTakeOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MenuCategories menuCategories = new MenuCategories();
+				menuCategories.setVisible(true);
+				dispose(); 
+			}
+		});
 	}
 }

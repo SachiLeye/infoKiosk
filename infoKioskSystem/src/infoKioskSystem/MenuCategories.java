@@ -11,6 +11,8 @@ import javax.swing.JButton;
 import java.awt.Color;
 
 import infoKioskSystem.CoffeeTea;
+import infoKioskSystem.PastriesTreats;
+import infoKioskSystem.SandwichSalad;
 public class MenuCategories extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -72,6 +74,30 @@ public class MenuCategories extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				CoffeeTea coffeeTea = new CoffeeTea();
 				coffeeTea.setVisible(true);
+				dispose(); 
+			}
+		});
+		
+		btnPastriesAndTreats.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PastriesTreats pastriesTreats = new PastriesTreats();
+				pastriesTreats.setVisible(true);
+				dispose(); 
+			}
+		});
+		
+		btnSandwichSalad.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SandwichSalad sandwichSalad = new SandwichSalad();
+				sandwichSalad.setVisible(true);
+				dispose(); 
+			}
+		});
+		
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				userPreference userPref = new userPreference();
+				userPref.setVisible(true);
 				dispose(); 
 			}
 		});
