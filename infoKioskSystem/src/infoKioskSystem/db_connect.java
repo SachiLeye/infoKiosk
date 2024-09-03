@@ -20,7 +20,7 @@ public class db_connect {
 			
 			con = DriverManager.getConnection(url, username, password);
 			
-			System.out.println("Connected Succesfully");
+			//System.out.println("Connected Succesfully");
 		}catch(Exception e) {
 			System.err.println("Failed to Connect");
 			e.printStackTrace();
