@@ -30,6 +30,7 @@ public class Ordering extends javax.swing.JFrame {
     boolean isOverFlowLatteAdded = false;
     boolean isBooleanBrewAdded = false;
     boolean isCompilerChaiAdded = false;
+    boolean isDebugKitAdded = false;
 
     /**
      * Launch the application.
@@ -87,7 +88,7 @@ public class Ordering extends javax.swing.JFrame {
         Panel panelBinaryBlend = new Panel();
         panelBinaryBlend.setLayout(null);
         panelBinaryBlend.setBackground(new Color(255, 239, 213));
-        panelBinaryBlend.setBounds(10, 49, 145, 203);
+        panelBinaryBlend.setBounds(85, 53, 145, 203);
         panel_2.add(panelBinaryBlend);
 
         JLabel lblNewLabel_1 = new JLabel("Binary Blend    P89.00");
@@ -153,7 +154,7 @@ public class Ordering extends javax.swing.JFrame {
         Panel panelLatte = new Panel();
         panelLatte.setLayout(null);
         panelLatte.setBackground(new Color(255, 239, 213));
-        panelLatte.setBounds(161, 49, 145, 203);
+        panelLatte.setBounds(236, 53, 145, 203);
         panel_2.add(panelLatte);
 
         JLabel lblNewLabel_1_2 = new JLabel("OverFlow Latte   P79.00");
@@ -221,7 +222,7 @@ public class Ordering extends javax.swing.JFrame {
         Panel panelBoolBrew = new Panel();
         panelBoolBrew.setLayout(null);
         panelBoolBrew.setBackground(new Color(255, 239, 213));
-        panelBoolBrew.setBounds(312, 49, 145, 203);
+        panelBoolBrew.setBounds(387, 53, 145, 203);
         panel_2.add(panelBoolBrew);
 
         JLabel lblNewLabel_1_2_1 = new JLabel("Boolean Brew   P79.00");
@@ -326,6 +327,7 @@ public class Ordering extends javax.swing.JFrame {
         JButton btnReceipt = new JButton("RECEIPT");
         btnReceipt.addActionListener(new ActionListener() {
             private JSpinner spinnerComChai;
+			private JSpinner spinnerDebugKit;
 
 			public void actionPerformed(ActionEvent e) {
                 // Clear the text area first
@@ -346,6 +348,7 @@ public class Ordering extends javax.swing.JFrame {
                     }
                 }
 
+                
                 if (isOverFlowLatteAdded) {
                     Integer quantityObj = (Integer) spinnerOverFlow.getValue();
                     int quantity = quantityObj.intValue();
@@ -387,6 +390,20 @@ public class Ordering extends javax.swing.JFrame {
                     }
                 }
                 
+                if (isDebugKitAdded) {
+                    Integer quantityObj = (Integer) spinnerDebugKit.getValue();
+                    int quantity = quantityObj.intValue();
+                    
+                    if (quantity > 0) {
+                        double pricePerItem = 49.00;
+                        double itemTotalPrice = pricePerItem * quantity;
+                        
+                        // Update the receipt text area
+                        textArea.append("Debug Kit P49.00 x " + quantity + "\n");
+                        textArea.append("Total: P" + String.valueOf(itemTotalPrice) + "\n");                      
+                    }
+                }
+                
                 
                 
                
@@ -396,7 +413,7 @@ public class Ordering extends javax.swing.JFrame {
         Panel panelChai = new Panel();
         panelChai.setLayout(null);
         panelChai.setBackground(new Color(255, 239, 213));
-        panelChai.setBounds(463, 49, 145, 203);
+        panelChai.setBounds(85, 277, 145, 203);
         panel_2.add(panelChai);
 
         JLabel lblNewLabel_1_2_1_1 = new JLabel("Compiler Chai   P89.00");
@@ -423,7 +440,7 @@ public class Ordering extends javax.swing.JFrame {
         JButton btnAddToOrder4 = new JButton("Add to Order");
         btnAddToOrder4.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Integer quantityObj = (Integer) spinnerComChai.getValue();
+               Integer quantityObj = (Integer) spinnerComChai.getValue();
                 int quantity = quantityObj.intValue();
 
                 if (quantity > 0) {
@@ -459,7 +476,215 @@ public class Ordering extends javax.swing.JFrame {
         btnAddToOrder4.setBounds(0, 178, 145, 25);
         panelChai.add(btnAddToOrder4);
 
+       
         
+        
+        Panel panelDebugKit = new Panel();
+        panelDebugKit.setLayout(null);
+        panelDebugKit.setBackground(new Color(255, 239, 213));
+        panelDebugKit.setBounds(236, 277, 145, 203);
+        panel_2.add(panelDebugKit);
+
+        JLabel lblNewLabel_1_2_2 = new JLabel("Debug Kit         P59.00");
+        lblNewLabel_1_2_2.setFont(new Font("Dialog", Font.BOLD, 11));
+        lblNewLabel_1_2_2.setBounds(10, 136, 135, 18);
+        panelDebugKit.add(lblNewLabel_1_2_2);
+
+        JLabel lblQuantity_2_2 = new JLabel("Quantity:");
+        lblQuantity_2_2.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
+        lblQuantity_2_2.setBounds(10, 155, 72, 18);
+        panelDebugKit.add(lblQuantity_2_2);
+
+        final JSpinner spinnerDebugKit = new JSpinner();
+        spinnerDebugKit.setModel(new SpinnerNumberModel(0, 0, 20, 1));
+        spinnerDebugKit.setFont(new Font("Tahoma", Font.PLAIN, 10));
+        spinnerDebugKit.setBounds(93, 155, 42, 21);
+        panelDebugKit.add(spinnerDebugKit);
+
+        Panel panel_2_1_2_2 = new Panel();
+        panel_2_1_2_2.setLayout(null);
+        panel_2_1_2_2.setBounds(10, 8, 125, 122);
+        panelDebugKit.add(panel_2_1_2_2);
+        
+        JButton btnAddDebugKit = new JButton("Add to Order");
+        btnAddDebugKit.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		Integer quantityObj = (Integer) spinnerDebugKit.getValue();
+                int quantity = quantityObj.intValue();
+
+                if (quantity > 0) {
+                    double pricePerItem = 89.00;
+                    double itemTotalPrice = pricePerItem * quantity;
+
+                    // Check if the item is already added to the order
+                    if (isDebugKitAdded) {
+                        // Update the quantity and total price
+                        String[] lines = textArea.getText().split("\n");
+                        for (int i = 0; i < lines.length; i++) {
+                            if (lines[i].startsWith("Debug Kit")) {
+                                lines[i] = "Debug Kit x P59.00" + quantity;
+                                break;
+                            }
+                        }
+                        textArea.setText(String.join("\n", lines));
+                        totalPrice += itemTotalPrice - (pricePerItem * (Integer) spinnerDebugKit.getPreviousValue());
+                    } else {
+                        // Add the item to the order
+                        textArea.append("Debug Kit P59.00 x " + quantity + "\n");
+                        totalPrice += itemTotalPrice;
+                        isDebugKitAdded = true;
+                    }
+
+                    // Update the total price in the JTextField
+                    textField.setText("P" + String.valueOf(totalPrice));
+                }
+        	}
+        });
+        btnAddDebugKit.setFont(new Font("STZhongsong", Font.PLAIN, 12));
+        btnAddDebugKit.setBounds(0, 178, 145, 25);
+        panelDebugKit.add(btnAddDebugKit);
+
+        
+        
+        
+       
+        Panel panelCodeCracker = new Panel();
+        panelCodeCracker.setLayout(null);
+        panelCodeCracker.setBackground(new Color(255, 239, 213));
+        panelCodeCracker.setBounds(387, 277, 145, 203);
+        panel_2.add(panelCodeCracker);
+
+        JLabel lblNewLabel_1_2_2_1 = new JLabel("CodeCracker     P49.00");
+        lblNewLabel_1_2_2_1.setFont(new Font("Dialog", Font.BOLD, 11));
+        lblNewLabel_1_2_2_1.setBounds(10, 136, 135, 18);
+        panelCodeCracker.add(lblNewLabel_1_2_2_1);
+
+        JLabel lblQuantity_2_2_1 = new JLabel("Quantity:");
+        lblQuantity_2_2_1.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
+        lblQuantity_2_2_1.setBounds(10, 155, 72, 18);
+        panelCodeCracker.add(lblQuantity_2_2_1);
+
+        JSpinner spinnerCodeCracker = new JSpinner();
+        spinnerCodeCracker.setModel(new SpinnerNumberModel(0, 0, 20, 1));
+        spinnerCodeCracker.setFont(new Font("Tahoma", Font.PLAIN, 10));
+        spinnerCodeCracker.setBounds(93, 155, 42, 21);
+        panelCodeCracker.add(spinnerCodeCracker);
+
+        Panel panel_2_1_2_2_1 = new Panel();
+        panel_2_1_2_2_1.setLayout(null);
+        panel_2_1_2_2_1.setBounds(10, 8, 125, 122);
+        panelCodeCracker.add(panel_2_1_2_2_1);
+        
+        JButton btnAddToOrder4_2 = new JButton("Add to Order");
+        btnAddToOrder4_2.setFont(new Font("STZhongsong", Font.PLAIN, 12));
+        btnAddToOrder4_2.setBounds(0, 178, 145, 25);
+        panelCodeCracker.add(btnAddToOrder4_2);
+
+        
+        
+        
+
+        Panel panelBugLava = new Panel();
+        panelBugLava.setLayout(null);
+        panelBugLava.setBackground(new Color(255, 239, 213));
+        panelBugLava.setBounds(85, 498, 145, 203);
+        panel_2.add(panelBugLava);
+
+        JLabel lblNewLabel_1_3_1 = new JLabel("BugLava            P49.00");
+        lblNewLabel_1_3_1.setFont(new Font("Dialog", Font.BOLD, 11));
+        lblNewLabel_1_3_1.setBounds(10, 136, 125, 18);
+        panelBugLava.add(lblNewLabel_1_3_1);
+
+        JLabel lblQuantity_1_1 = new JLabel("Quantity:");
+        lblQuantity_1_1.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
+        lblQuantity_1_1.setBounds(10, 155, 72, 18);
+        panelBugLava.add(lblQuantity_1_1);
+
+        JSpinner spinnerBugLava = new JSpinner();
+        spinnerBugLava.setModel(new SpinnerNumberModel(0, 0, 20, 1));
+        spinnerBugLava.setFont(new Font("Tahoma", Font.PLAIN, 10));
+        spinnerBugLava.setBounds(93, 155, 42, 21);
+        panelBugLava.add(spinnerBugLava);
+
+        Panel panel_2_1_1_1 = new Panel();
+        panel_2_1_1_1.setLayout(null);
+        panel_2_1_1_1.setBounds(10, 8, 125, 122);
+        panelBugLava.add(panel_2_1_1_1);
+        
+        JButton btnAddToOrder4_3 = new JButton("Add to Order");
+        btnAddToOrder4_3.setFont(new Font("STZhongsong", Font.PLAIN, 12));
+        btnAddToOrder4_3.setBounds(0, 183, 145, 25);
+        panelBugLava.add(btnAddToOrder4_3);
+
+       
+        
+        
+        Panel panelByteBites = new Panel();
+        panelByteBites.setLayout(null);
+        panelByteBites.setBackground(new Color(255, 239, 213));
+        panelByteBites.setBounds(236, 498, 145, 203);
+        panel_2.add(panelByteBites);
+
+        JLabel lblNewLabel_1_3_1_1 = new JLabel("Byte Bites         P59.00");
+        lblNewLabel_1_3_1_1.setFont(new Font("Dialog", Font.BOLD, 11));
+        lblNewLabel_1_3_1_1.setBounds(10, 136, 125, 18);
+        panelByteBites.add(lblNewLabel_1_3_1_1);
+
+        JLabel lblQuantity_1_1_1 = new JLabel("Quantity:");
+        lblQuantity_1_1_1.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
+        lblQuantity_1_1_1.setBounds(10, 155, 72, 18);
+        panelByteBites.add(lblQuantity_1_1_1);
+
+        JSpinner spinnerBites = new JSpinner();
+        spinnerBites.setModel(new SpinnerNumberModel(0, 0, 20, 1));
+        spinnerBites.setFont(new Font("Tahoma", Font.PLAIN, 10));
+        spinnerBites.setBounds(93, 155, 42, 21);
+        panelByteBites.add(spinnerBites);
+
+        Panel panel_2_1_1_1_1 = new Panel();
+        panel_2_1_1_1_1.setLayout(null);
+        panel_2_1_1_1_1.setBounds(10, 8, 125, 122);
+        panelByteBites.add(panel_2_1_1_1_1);
+        
+        JButton btnAddToOrder4_4 = new JButton("Add to Order");
+        btnAddToOrder4_4.setFont(new Font("STZhongsong", Font.PLAIN, 12));
+        btnAddToOrder4_4.setBounds(0, 183, 145, 25);
+        panelByteBites.add(btnAddToOrder4_4);
+
+        
+        
+        
+        Panel panelGlitchCookies = new Panel();
+        panelGlitchCookies.setLayout(null);
+        panelGlitchCookies.setBackground(new Color(255, 239, 213));
+        panelGlitchCookies.setBounds(387, 498, 145, 203);
+        panel_2.add(panelGlitchCookies);
+
+        JLabel lblNewLabel_1_3_1_1_1 = new JLabel("Glitch Cookies  P59.00");
+        lblNewLabel_1_3_1_1_1.setFont(new Font("Dialog", Font.BOLD, 11));
+        lblNewLabel_1_3_1_1_1.setBounds(10, 136, 125, 18);
+        panelGlitchCookies.add(lblNewLabel_1_3_1_1_1);
+
+        JLabel lblQuantity_1_1_1_1 = new JLabel("Quantity:");
+        lblQuantity_1_1_1_1.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
+        lblQuantity_1_1_1_1.setBounds(10, 155, 72, 18);
+        panelGlitchCookies.add(lblQuantity_1_1_1_1);
+
+        JSpinner spinnerGlitch = new JSpinner();
+        spinnerGlitch.setModel(new SpinnerNumberModel(0, 0, 20, 1));
+        spinnerGlitch.setFont(new Font("Tahoma", Font.PLAIN, 10));
+        spinnerGlitch.setBounds(93, 155, 42, 21);
+        panelGlitchCookies.add(spinnerGlitch);
+
+        Panel panel_2_1_1_1_1_1 = new Panel();
+        panel_2_1_1_1_1_1.setLayout(null);
+        panel_2_1_1_1_1_1.setBounds(10, 8, 125, 122);
+        panelGlitchCookies.add(panel_2_1_1_1_1_1);
+        
+        JButton btnAddToOrder4_5 = new JButton("Add to Order");
+        btnAddToOrder4_5.setFont(new Font("STZhongsong", Font.PLAIN, 12));
+        btnAddToOrder4_5.setBounds(0, 183, 145, 25);
+        panelGlitchCookies.add(btnAddToOrder4_5);
 
         btnReceipt.setFont(new Font("Trebuchet MS", Font.PLAIN, 14));
         btnReceipt.setBackground(new Color(0, 191, 255));
